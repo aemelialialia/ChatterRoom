@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+*{
+  box-sizing: border-box;
+}
+.App {
+  background: #C6FFDD;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  height: 100vh;
+  text-align: center;
+}
+
+.header{
+  font-size: 40pt;
+  font-family: 'Pacifico';
+  background: rgba(0,0,0,0.8);
+  color: darkorange;
+  padding: 20px;
+  text-align: left;
+  border-bottom: 5px solid darkorange;
+  display: flex;
+  align-content: center;
+}
+
+.text-input{
+  position: absolute;
+  bottom: 0;
+  height: 80px;
+  width: 100%;
+  border-top: 2px solid darkorange;
+  display: flex;
+  align-items: left;
+}
+
+.logo{
+  height: 95px;
+  margin-right: 20px;
+}
+
+.text-input button{
+  width: 80px;
+  height: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.text-input input{
+  width: calc(100% - 50px);
+  height: 80%
+}
