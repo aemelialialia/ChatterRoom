@@ -11,6 +11,12 @@ function App() {
        Chatter
       </header>
       <TextInput className="text-input" alt=""/>
+        <div class="chat">
+        <div class="chat-message them">Are we meeting today?</div>
+        <div class="chat-message me">yes, what time suits you?</div>
+        <div class="chat-message them">I was thinking after lunch</div>
+        <div class="chat-message me">Perfect, see you later!</div>
+      </div>
     </div>
   )
 }

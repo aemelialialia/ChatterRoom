@@ -5,8 +5,10 @@
 }
 .App {
   background: #C6FFDD;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: -webkit-linear-gradient(left, #f7797d, #FBD786, #C6FFDD);
+background: -moz-linear-gradient(left, #f7797d, #FBD786, #C6FFDD);
+background: -o-linear-gradient(left, #f7797d, #FBD786, #C6FFDD);
+background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */ /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   height: 100vh;
   text-align: center;
@@ -15,23 +17,9 @@ background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+
 .header{
   font-size: 40pt;
   font-family: 'Pacifico';
-  background: rgba(0,0,0,0.8);
   color: darkorange;
   padding: 20px;
-  text-align: left;
-  border-bottom: 5px solid darkorange;
-  display: flex;
-  align-content: center;
-}
-
-.text-input{
-  position: absolute;
-  bottom: 0;
-  height: 80px;
-  width: 100%;
-  border-top: 2px solid darkorange;
-  display: flex;
-  align-items: left;
+  display: inline-flex;
 }
 
 .logo{
@@ -39,14 +27,88 @@ background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+
   margin-right: 20px;
 }
 
+.text-input{
+  position: absolute;
+  bottom: 0;
+  height: 80px;
+  width: 100%;
+  border-top: 3px solid darkorange;
+  display: flex;
+  align-items: left;
+}
+
 .text-input button{
-  width: 80px;
-  height: 100%;
-  border-radius: 8px;
+  width: 50px;
+  height: 80%;
+  border-radius: 15 px;
   cursor: pointer;
+  margin-top: 7px;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
 }
 
 .text-input input{
-  width: calc(100% - 50px);
-  height: 80%
+  width: calc(100% - 80px);
+  height: 80%;
+  margin-top: 7px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 15px;
+  text-align: left;
+  background-color:rgba(0,0,0, 0.7);
+  border: 1px solid white;
+  color: white;
 }
+
+.send{
+  width: 40px;
+  height: 65%;
+}
+
+
+body {
+  font: 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+.chat {
+  margin: 0 auto;
+  max-width: 80%;
+}
+.chat-message {
+  margin: 0 0 1em;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  background: #ffffff;
+  position: relative;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  max-width: 75%;
+  clear: both;
+}
+.chat-message.them {
+  float: left;
+}
+.chat-message.them::after {
+  content: "";
+  position: absolute;
+  left: -0.5em;
+  bottom: 0;
+  width: 0.5em;
+  height: 1em;
+  border-right: 0.5em solid #ffffff;
+  border-bottom-right-radius: 1em 0.5em;
+}
+.chat-message.me {
+  float: right;
+  background-color: #82D3FF;
+}
+.chat-message.me::after {
+  content: "";
+  position: absolute;
+  right: -0.5em;
+  bottom: 0;
+  width: 0.5em;
+  height: 1em;
+  border-left: 0.5em solid #82D3FF;
+  border-bottom-left-radius: 1em 0.5em;
+}
+
