@@ -38,16 +38,24 @@ background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-
 }
 
 .text-input button{
-  width: 50px;
-  height: 80%;
-  border-radius: 15 px;
+  border-radius: 100px;
   cursor: pointer;
   margin-top: 7px;
+  color: white;
   background-color: rgba(255, 255, 255, 0);
   border: none;
 }
 
-.text-input input{
+.text-input button:hover{
+  color: blue;
+  background: none;
+}
+
+.text-input button[disabled]{
+  color: darkgrey;
+}
+
+.text-input textarea{
   width: calc(100% - 80px);
   height: 80%;
   margin-top: 7px;
@@ -58,13 +66,8 @@ background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-
   background-color:rgba(0,0,0, 0.7);
   border: 1px solid white;
   color: white;
+  padding: 10px;
 }
-
-.send{
-  width: 40px;
-  height: 65%;
-}
-
 
 body {
   font: 16px "Helvetica Neue", Helvetica, Arial, sans-serif;

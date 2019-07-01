@@ -10,7 +10,8 @@ function App() {
         <img src={logo} className="logo" alt="" />
        Chatter
       </header>
-      <TextInput className="text-input" alt=""/>
+      <TextInput className="text-input" alt=""
+        sendMessage={e=> console.log(e)}/>
         <div class="chat">
         <div class="chat-message them">Are we meeting today?</div>
         <div class="chat-message me">yes, what time suits you?</div>
