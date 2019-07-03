@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import logo from './chat_logo.png'
 import TextInput from './TextInput'
+import NamePicker from './NamePicker.js'
 
 class App extends React.Component {
 
@@ -22,6 +23,7 @@ class App extends React.Component {
         <header className="header">
           <img src={logo} className="logo" alt="" />
         Chatter
+        <NamePicker />
         </header>
         <TextInput className="text-input" alt=""
           sendMessage={this.sendMessage }/>

@@ -75,7 +75,9 @@ body {
 }
 .chat {
   margin: 0 auto;
-  max-width: 90%;
+  max-width: 100%;
+  height: calc(100% - 234px);
+  overflow: auto;
 }
 .chat-message {
   margin: 0 0 1em;
@@ -90,7 +92,7 @@ body {
 .chat-message.them {
   float: left;
 }
-.chat-message.them::after {
+.chat-message.them::before {
   content: "";
   position: relative;
   left: -0.5em;
