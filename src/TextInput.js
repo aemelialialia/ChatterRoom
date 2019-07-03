@@ -13,11 +13,19 @@ class TextInput extends React.Component {
         this.setState({text:""})
     }
 
+    keyPress = (e) => {
+        if(e.key==='Enter') {
+            e.preventDefault()
+            this.send()
+        }
+    }
+
     render(){
         return(<div className="text-input" alt="Type Message">
             <textarea value={this.state.text}
                 placeholder='Write your message here...'
                 onChange={e=> this.setState({text: e.target.value})}
+                onKeyPress={this.keyPress}
             />
             <button disabled={!this.state.text}
                 onClick={this.send}>

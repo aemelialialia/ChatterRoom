@@ -75,7 +75,7 @@ body {
 }
 .chat {
   margin: 0 auto;
-  max-width: 80%;
+  max-width: 90%;
 }
 .chat-message {
   margin: 0 0 1em;
@@ -92,7 +92,7 @@ body {
 }
 .chat-message.them::after {
   content: "";
-  position: absolute;
+  position: relative;
   left: -0.5em;
   bottom: 0;
   width: 0.5em;
@@ -103,6 +103,8 @@ body {
 .chat-message.me {
   float: right;
   background-color: #82D3FF;
+  position: relative;
+  display: flex;
 }
 .chat-message.me::after {
   content: "";
