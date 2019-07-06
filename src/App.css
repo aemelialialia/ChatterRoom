@@ -75,7 +75,7 @@ body {
 }
 .chat {
   margin: 0 auto;
-  max-width: 100%;
+  max-width: 90%;
   height: calc(100% - 234px);
   overflow: auto;
 }
@@ -107,6 +107,7 @@ body {
   background-color: #82D3FF;
   position: relative;
   display: flex;
+  margin-right: 20px;
 }
 .chat-message.me::after {
   content: "";
@@ -117,5 +118,11 @@ body {
   height: 1em;
   border-left: 0.5em solid #82D3FF;
   border-bottom-left-radius: 1em 0.5em;
+}
+
+.name-input {
+  justify-content: space-between;
+  position: relative;
+  float: right;
 }
 
