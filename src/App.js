@@ -3,19 +3,81 @@ import './App.css';
 import logo from './chat_logo.png'
 import TextInput from './TextInput'
 import NamePicker from './NamePicker.js'
+import * as firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/storage"
 
 class App extends React.Component {
 
   state={
     messages: [],
     name: "",
-    editName: true
+    editName: false
+  }
+
+  // sendMessage = (text) => {
+  //   var message = {
+  //     text,
+  //     from: this.state.name
+  //   }
+  //   var newMessagesArray = [message, ...this.state.messages]
+  //   this.setState({messages: newMessagesArray})
+  // }
+
+  componentWillMount() {
+    var name = localStorage.getItem('name')
+    if(name) {
+      this.setState({name})
+    }
+
+    //FIREBASE
+
+      firebase.initializeApp({
+      apiKey: "AIzaSyBAJVwrP5J4AhVKd5ijYtcTF9XMV6tIcY4",
+      authDomain: "msgr-2.firebaseapp.com",
+      projectId: "msgr-2",
+      storageBucket: "msgr-2.appspot.com",
+    });
+    
+    this.db = firebase.firestore();
+
+    this.db.collection("messages").onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === "added") {
+          //console.log(change.doc.data())
+          this.receive(change.doc.data())
+        }
+      })
+    })
+  }
+  
+  //MORE FIREBASE: SEND AND RECEIVE
+
+    receive = (m) => {
+    const messages = [...this.state.messages, m]
+    messages.sort((a,b)=>b.ts-a.ts)
+    this.setState({messages})
+  }
+
+  send = (m) => {
+    this.db.collection("messages").add({
+      ...m,
+      from: this.state.name || 'No name',
+      ts: Date.now()
+    })
+  }
+
+  setEditName = (editName) => {
+    if (!editName) {
+      localStorage.setItem('name', this.state.name)
+    }
+    this.setState({editName})
   }
 
   render() {
+    var {editName, name} = this.state
     var {messages} = this.state
     console.log(messages);
-    // console.log(this.state.messages)
     return (
      <div className="App">
         <header className="header">
@@ -25,22 +87,19 @@ class App extends React.Component {
         </div>
         <div className="namepicker">
         <NamePicker
-          name={this.state.name}
-          editName={this.state.editName}
-          changeName={name=>this.setState({name})}
-          setEditName={editName=>this.setState({editName})} />
+            name={name}
+            editName={editName}
+            changeName={name=> this.setState({name})}
+            setEditName={this.setEditName} />
         </div>
         </header>
         <TextInput className="text-input" alt=""
-          sendMessage={this.sendMessage}/>
+          sendMessage={text=> this.send({text})}/>
         <main className="chat">
-            <div className="chat-message them">Are we meeting today?</div>
-            <div className="chat-message me">yes, what time suits you?</div>
-            <div className="chat-message them">I was thinking after lunch</div>
-            <div className="chat-message me">Perfect, see you later!</div>
           {messages.map((m,i) => {
-            return <div key={i} className="chat-message me">
-              <span>{m}</span>
+            return <div key={i} className={`chat-message ${m.from===name?"me":"them"}`}>
+             {m.from!==name && <div className="chat-name">{m.from}</div>}
+              <span>{m.text}</span>
             </div>
           })}
         </main>
