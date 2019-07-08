@@ -8,23 +8,8 @@ class App extends React.Component {
 
   state={
     messages: [],
-    name:"",
+    name: "",
     editName: true
-  }
-
-  sendMessage = (m) => {
-    var messages = [...this.state.messages, m]
-    this.setState({messages})
-  }
-
-  setEditName = (boolean) => {
-    var editName = boolean
-    this.setState({editName})
-  }
-
-  changeName = (e) => {
-    var name = e
-    this.setState({name})
   }
 
   render() {
@@ -34,15 +19,17 @@ class App extends React.Component {
     return (
      <div className="App">
         <header className="header">
+        <div className="title">
           <img src={logo} className="logo" alt="" />
         Chatter
-        <div className="name-input">
-        <NamePicker 
+        </div>
+        <div className="namepicker">
+        <NamePicker
           name={this.state.name}
           editName={this.state.editName}
-          changeName={this.changeName}
-          setEditName={this.setEditName} />
-          </div>
+          changeName={name=>this.setState({name})}
+          setEditName={editName=>this.setState({editName})} />
+        </div>
         </header>
         <TextInput className="text-input" alt=""
           sendMessage={this.sendMessage}/>
