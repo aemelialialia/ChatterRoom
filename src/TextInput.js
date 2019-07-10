@@ -27,6 +27,7 @@ class TextInput extends React.Component {
                 onChange={e=> this.setState({text: e.target.value})}
                 onKeyPress={this.keyPress}
             />
+             {/*<Camera takePicture={this.takePicture} />*/}
             <button disabled={!this.state.text}
                 onClick={this.send}>
                 <IoIosSend style={{height:43,width:43}} />

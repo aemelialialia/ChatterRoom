@@ -33,10 +33,10 @@ class App extends React.Component {
     //FIREBASE
 
       firebase.initializeApp({
-      apiKey: "AIzaSyBAJVwrP5J4AhVKd5ijYtcTF9XMV6tIcY4",
-      authDomain: "msgr-2.firebaseapp.com",
-      projectId: "msgr-2",
-      storageBucket: "msgr-2.appspot.com",
+      apiKey: "AIzaSyDi6qTqPC9QchL3jDgVzmVlOr7YwWXSi70",
+      authDomain: "chatterroom438.firebaseapp.com",
+      projectId: "chatterroom438",
+      storageBucket: "chatterroom438.appspot.com",
     });
     
     this.db = firebase.firestore();

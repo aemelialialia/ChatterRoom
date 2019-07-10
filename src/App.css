@@ -91,10 +91,12 @@ body {
 }
 .chat-message.them {
   float: left;
+  margin-top: 15px;
+  margin-left: 10px;
 }
 .chat-message.them::before {
   content: "";
-  position: relative;
+  position: absolute;
   left: -0.5em;
   bottom: 0;
   width: 0.5em;
@@ -130,8 +132,36 @@ body {
   left: 11px;
 }
 
+.edit-username {
+  margin-top: 19px;
+  margin-right: 38px;
+}
+
 .name-button{
   margin-top: 30px;
+  background:transparent;
+  border:1px solid darkorange;
+  color:darkorange;
+  font-size:10px;
+  padding:7px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.name-button:hover{
+  background:rgba(255,255,255,0.1)
+}
+.name-input{
+  color:white;
+  height:31px;
+  border:1px solid white;
+  border-radius:14px;
+  padding-left:12px;
+  background:orange;
+  padding-bottom:2px;
+  font-size:12px;
+}
+.name-input{
+  outline: darkorange;
 }
 
 .namepicker {
@@ -150,5 +180,4 @@ body {
 
 .username {
   padding-top: 38px;
-  font-family: monospace;
 }
