@@ -96,11 +96,8 @@ class App extends React.Component {
         <TextInput className="text-input" alt=""
           sendMessage={text=> this.send({text})}/>
         <main className="chat">
-          {messages.map((m,i) => {
-            return <div key={i} className={`chat-message ${m.from===name?"me":"them"}`}>
-             {m.from!==name && <div className="chat-name">{m.from}</div>}
-              <span>{m.text}</span>
-            </div>
+          {messages.map((m,i) =>{
+            return <Message key={i} m={m} name={name} />
           })}
         </main>
       </div>
@@ -109,3 +106,12 @@ class App extends React.Component {
 }
 
 export default App;
+
+function Message (props) {
+  var {m, name} = props
+  return(<div className={`chat-message ${m.from===name?"me":"them"}`}>
+          {m.from!==name && <div className="chat-name">{m.from}</div>}
+        <span>{m.text}</span>
+      </div>
+  )
+}
