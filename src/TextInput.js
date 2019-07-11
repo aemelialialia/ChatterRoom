@@ -1,6 +1,7 @@
 import React from 'react';
 // import send from './send.png';
 import { IoIosSend } from "react-icons/io";
+import {IoIosCamera} from "react-icons/io";
 
 class TextInput extends React.Component {
 
@@ -27,12 +28,15 @@ class TextInput extends React.Component {
                 onChange={e=> this.setState({text: e.target.value})}
                 onKeyPress={this.keyPress}
             />
-             {/*<Camera takePicture={this.takePicture} />*/}
+            <button onClick={this.props.showCamera}>
+                <IoIosCamera style={{height:30,width:30}} />
+            </button>
             <button disabled={!this.state.text}
                 onClick={this.send}>
-                <IoIosSend style={{height:43,width:43}} />
+                <IoIosSend style={{height:30,width:30}} />
             </button>
-        </div>)
+        </div>
+        )
     }
 }
 

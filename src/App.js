@@ -6,39 +6,32 @@ import NamePicker from './NamePicker.js'
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage"
+import Camera from "react-snap-pic";
 
 class App extends React.Component {
 
-  state={
+  state = {
     messages: [],
     name: "",
-    editName: false
+    editName: false,
+    showCamera: false
   }
-
-  // sendMessage = (text) => {
-  //   var message = {
-  //     text,
-  //     from: this.state.name
-  //   }
-  //   var newMessagesArray = [message, ...this.state.messages]
-  //   this.setState({messages: newMessagesArray})
-  // }
 
   componentWillMount() {
     var name = localStorage.getItem('name')
-    if(name) {
-      this.setState({name})
+    if (name) {
+      this.setState({ name })
     }
 
     //FIREBASE
 
-      firebase.initializeApp({
+    firebase.initializeApp({
       apiKey: "AIzaSyDi6qTqPC9QchL3jDgVzmVlOr7YwWXSi70",
       authDomain: "chatterroom438.firebaseapp.com",
       projectId: "chatterroom438",
       storageBucket: "chatterroom438.appspot.com",
     });
-    
+
     this.db = firebase.firestore();
 
     this.db.collection("messages").onSnapshot((snapshot) => {
@@ -50,13 +43,13 @@ class App extends React.Component {
       })
     })
   }
-  
+
   //MORE FIREBASE: SEND AND RECEIVE
 
-    receive = (m) => {
+  receive = (m) => {
     const messages = [...this.state.messages, m]
-    messages.sort((a,b)=>b.ts-a.ts)
-    this.setState({messages})
+    messages.sort((a, b) => b.ts - a.ts)
+    this.setState({ messages })
   }
 
   send = (m) => {
@@ -71,32 +64,35 @@ class App extends React.Component {
     if (!editName) {
       localStorage.setItem('name', this.state.name)
     }
-    this.setState({editName})
+    this.setState({ editName })
   }
 
   render() {
-    var {editName, name} = this.state
-    var {messages} = this.state
+    var { editName, name } = this.state
+    var { messages } = this.state
     console.log(messages);
     return (
-     <div className="App">
+      <div className="App">
         <header className="header">
-        <div className="title">
-          <img src={logo} className="logo" alt="" />
-        Chatter
+          <div className="title">
+            <img src={logo} className="logo" alt="" />
+            Chatter
         </div>
-        <div className="namepicker">
-        <NamePicker
-            name={name}
-            editName={editName}
-            changeName={name=> this.setState({name})}
-            setEditName={this.setEditName} />
-        </div>
+          <div className="namepicker">
+            <NamePicker
+              name={name}
+              editName={editName}
+              changeName={name => this.setState({ name })}
+              setEditName={this.setEditName} />
+          </div>
         </header>
         <TextInput className="text-input" alt=""
-          sendMessage={text=> this.send({text})}/>
+          sendMessage={text => this.send({ text })}
+          showCamera={() => this.setState({showCamera:true})} />
+        {this.state.showCamera && <Camera
+          takePicture={this.takePicture} />}
         <main className="chat">
-          {messages.map((m,i) =>{
+          {messages.map((m, i) => {
             return <Message key={i} m={m} name={name} />
           })}
         </main>
@@ -107,11 +103,16 @@ class App extends React.Component {
 
 export default App;
 
-function Message (props) {
-  var {m, name} = props
-  return(<div className={`chat-message ${m.from===name?"me":"them"}`}>
-          {m.from!==name && <div className="chat-name">{m.from}</div>}
-        <span>{m.text}</span>
-      </div>
+function Message(props) {
+  var { m, name } = props
+  return (<div className={`chat-message ${m.from === name ? "me" : "them"}`}>
+    {m.from !== name && <div className="chat-name">{m.from}</div>}
+    <span>{m.text}</span>
+  </div>
   )
+}
+
+function takePicture(img) {
+  console.log(img);
+  this.setState({showCamera:false});
 }
