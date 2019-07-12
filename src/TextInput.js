@@ -3,11 +3,14 @@ import React from 'react';
 import { IoIosSend } from "react-icons/io";
 import { IoIosCamera } from "react-icons/io";
 import { IoIosHappy } from "react-icons/io";
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
 
 class TextInput extends React.Component {
 
-    state ={
-        text: ""
+    state = {
+        text: "",
+        showPicker: false
     }
 
     send = () => {
@@ -22,6 +25,19 @@ class TextInput extends React.Component {
         }
     }
 
+    addEmoji = (e) => {
+        //console.log(e.native)
+        let emoji = e.native;
+        this.setState({
+            text: this.state.text + emoji
+        })
+    }
+
+    // toggleEmoji = () => {
+    //     var open = this.state.showPicker
+    //     this.setState({ open: !open })
+    // }
+
     render() {
         return (<div className="text-input" alt="Type Message">
             <textarea value={this.state.text}
@@ -29,6 +45,12 @@ class TextInput extends React.Component {
                 onChange={e => this.setState({ text: e.target.value })}
                 onKeyPress={this.keyPress}
             />
+                <Picker
+                    set='emojione'
+                    onSelect={this.addEmoji}
+                    title='Pick your emoji…' emoji='point_up'
+                    style={{ position: 'absolute', bottom: '81px', right: '67px' }}
+                    i18n={{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }} />
             <button onClick={this.props.showPicker}>
                 <IoIosHappy style={{ height: 30, width: 30 }} />
             </button>
