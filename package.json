@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "emoji-mart": "^2.11.1",
     "firebase": "^6.2.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-icons": "^3.7.0",
     "react-scripts": "3.0.1",
-    "react-snap-pic": "0.0.2"
+    "react-snap-pic": "0.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

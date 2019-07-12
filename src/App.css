@@ -182,10 +182,6 @@ body {
   padding-top: 38px;
 }
 
-.video {
-    position: absolute;
-    background: black;
-    object-fit: cover;
-    height: 200px;
-    width: 200px;
+.emoji-mart{
+  z-index: 10;
 }

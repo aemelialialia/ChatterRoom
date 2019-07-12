@@ -7,6 +7,8 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage"
 import Camera from "react-snap-pic";
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
 
 class App extends React.Component {
 
@@ -14,7 +16,8 @@ class App extends React.Component {
     messages: [],
     name: "",
     editName: false,
-    showCamera: false
+    showCamera: false,
+    showPicker: false
   }
 
   componentWillMount() {
@@ -67,6 +70,17 @@ class App extends React.Component {
     this.setState({ editName })
   }
 
+  // emojiToggle = () => {
+  //   const { close } = this.state.showPicker;
+  //   this.setState({ close: !close })
+  // }
+
+
+  takePicture = (img) => {
+    console.log(img);
+    this.setState({ showCamera: false });
+  }
+
   render() {
     var { editName, name } = this.state
     var { messages } = this.state
@@ -88,9 +102,16 @@ class App extends React.Component {
         </header>
         <TextInput className="text-input" alt=""
           sendMessage={text => this.send({ text })}
-          showCamera={() => this.setState({showCamera:true})} />
+          showCamera={() => this.setState({ showCamera: true })}
+          showPicker={() => this.setState({showPicker : true})} />
         {this.state.showCamera && <Camera
           takePicture={this.takePicture} />}
+        {this.state.showPicker &&
+          <Picker set='emojione'
+            onSelect={this.addEmoji}
+            title='Pick your emoji…' emoji='point_up'
+            style={{ position: 'absolute', bottom: '81px', right: '67px' }}
+            i18n={{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }} />}
         <main className="chat">
           {messages.map((m, i) => {
             return <Message key={i} m={m} name={name} />
@@ -110,9 +131,4 @@ function Message(props) {
     <span>{m.text}</span>
   </div>
   )
-}
-
-function takePicture(img) {
-  console.log(img);
-  this.setState({showCamera:false});
 }
