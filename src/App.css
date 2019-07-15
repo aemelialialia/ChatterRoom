@@ -76,8 +76,9 @@ body {
 .chat {
   margin: 0 auto;
   max-width: 90%;
-  height: calc(100% - 234px);
+  max-height: calc(90% - 20rem);
   overflow: auto;
+  margin-bottom: 10rem;
 }
 .chat-message {
   margin: 0 0 1em;
@@ -155,7 +156,7 @@ body {
   height:31px;
   border:1px solid white;
   border-radius:14px;
-  padding-left:12px;
+  padding-left:2rem;
   background:orange;
   padding-bottom:2px;
   font-size:12px;
@@ -175,7 +176,7 @@ body {
   display: inline-flex;
   float: left;
   justify-content: space-between;
-  padding-right: 412px;
+  padding-right: 10rem;
 }
 
 .username {

@@ -7,6 +7,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage"
 import Camera from "react-snap-pic";
+import Div100vh from 'react-div-100vh'
 
 class App extends React.Component {
 
@@ -68,21 +69,26 @@ class App extends React.Component {
   }
 
 
-  takePicture = (img) => {
-    console.log(img);
+  takePicture = async(img) => {
+    // console.log(img);
     this.setState({ showCamera: false });
+    const imgID = Math.random().toString(36).substring(7);
+    var storageRef = firebase.storage().ref();
+    var ref = storageRef.child(imgID + '.jpg');
+    await ref.putString(img, 'data_url')
+    this.send({ img: imgID })
   }
 
   render() {
-    var { editName, name } = this.state
+    var { editName, name, showPicker } = this.state
     var { messages } = this.state
     console.log(messages);
     return (
-      <div className="App">
+      <Div100vh className="App">
         <header className="header">
           <div className="title">
             <img src={logo} className="logo" alt="" />
-            Chatter
+        {editName ? '' : 'Chatter'}
         </div>
           <div className="namepicker">
             <NamePicker
@@ -95,7 +101,7 @@ class App extends React.Component {
         <TextInput className="text-input" alt=""
           sendMessage={text => this.send({ text })}
           showCamera={() => this.setState({ showCamera: true })}
-          showPicker={()=> this.setState({showPicker : true})} />
+          showPicker={() => this.setState({ showPicker: !showPicker })} />
         {this.state.showCamera && <Camera
           takePicture={this.takePicture} />}
         <main className="chat">
@@ -103,18 +109,21 @@ class App extends React.Component {
             return <Message key={i} m={m} name={name} />
           })}
         </main>
-      </div>
+      </Div100vh>
     )
   }
 }
 
 export default App;
 
+const bucket = 'https://firebasestorage.googleapis.com/v0/b/chatterroom438.appspot.com/o/'
+const suffix = '.jpg?alt=media'
 function Message(props) {
   var { m, name } = props
   return (<div className={`chat-message ${m.from === name ? "me" : "them"}`}>
     {m.from !== name && <div className="chat-name">{m.from}</div>}
     <span>{m.text}</span>
+    {m.img && <img alt="pic" src={bucket+m.img+suffix} />}
   </div>
   )
 }

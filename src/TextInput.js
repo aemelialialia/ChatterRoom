@@ -33,10 +33,9 @@ class TextInput extends React.Component {
         })
     }
 
-    // toggleEmoji = () => {
-    //     var open = this.state.showPicker
-    //     this.setState({ open: !open })
-    // }
+    toggleEmoji = () => {
+        this.setState({ showPicker : !this.state.showPicker })
+    }
 
     render() {
         return (<div className="text-input" alt="Type Message">
@@ -45,13 +44,13 @@ class TextInput extends React.Component {
                 onChange={e => this.setState({ text: e.target.value })}
                 onKeyPress={this.keyPress}
             />
-                <Picker
+               {this.state.showPicker && <Picker
                     set='emojione'
                     onSelect={this.addEmoji}
                     title='Pick your emoji…' emoji='point_up'
                     style={{ position: 'absolute', bottom: '81px', right: '67px' }}
-                    i18n={{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }} />
-            <button onClick={this.props.showPicker}>
+                    i18n={{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }} />}
+            <button onClick={this.toggleEmoji}>
                 <IoIosHappy style={{ height: 30, width: 30 }} />
             </button>
             <button onClick={this.props.showCamera}>
